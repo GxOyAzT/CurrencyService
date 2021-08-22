@@ -34,6 +34,12 @@ namespace CurrencyService.API
 
             services.AddControllers();
 
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = Configuration.GetConnectionString("Redis");
+                options.InstanceName = "CurrencyService_";
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CurrencyService.API", Version = "v1" });
